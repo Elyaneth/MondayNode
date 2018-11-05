@@ -29,6 +29,10 @@ module.exports = {
 			res.write('Hello ' + params['name']);  
 		  }
 	  }
+	  else if(path == '/') {
+		res.writeHead(200);	  
+		res.write("Hello ! It appears you have removed part of the url or have typed an incomplete url. \n You need to add hello?name=... where ... is a name \n Like this : http://localhost:8080/hello?name=Pierre-Louis");
+	  }
 	  else {
 		res.writeHead(404);	  
 		res.write("Error 404, message not found");
