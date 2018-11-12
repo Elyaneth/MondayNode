@@ -2,8 +2,8 @@
 
 ### Introduction
 
-This TP is an introduction to routes in node.js
-The goal is to use url queries to detect certain names, or instead detect if the query is not in the url.
+This TP is an introduction to express in node.js
+The goal is to use express queries to detect certain names, or instead detect if the query is not in the url.
 
 We have 3 cases:
 If the name is mine, Pierre-Louis, you get a short introduction to myself.
@@ -19,9 +19,9 @@ Use node index.js to start the server.
 It will be available on port 8080.
 
 TO access the server, open your browser, and type in or paste the url below if you are using localhost, which is the case by default:
-http://localhost:8080/hello?name=Pierre-Louis
+http://localhost:8080/hello/:Pierre-Louis
 
-To test the program, change the value after "name=", or remove parts of the url (leave http://localhost:8080 intact)
+To test the program, change the value after "hello/:", or remove parts of the url (leave http://localhost:8080 intact)
 
 ## Authors
 
