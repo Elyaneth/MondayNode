@@ -1,10 +1,14 @@
 // Imports
-const http = require('http')
-const url = require('url')
-const qs = require('querystring')
+express = require('express')
+var handles =require('./handles')
 
-//this imports objects, functions, etc from test01
-const handles = require('./handles')
+app = express()
 
-const server = http.createServer(handles.serverHandle);
-server.listen(8080)
+app.set('port', 8080)
+
+require('./handles')(app);
+
+app.listen(
+  app.get('port'), 
+  () => console.log(`server listening on ${app.get('port')}`)
+)
