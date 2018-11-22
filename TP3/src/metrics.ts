@@ -35,6 +35,7 @@ export class MetricsHandler {
     const stream = this.db.createReadStream()
 
     var results: Metric[] = []
+    var failure = "failure on keys:"
 
     stream.on('error', callback)
     stream.on('end', (err: Error) => {callback(null, results)})
@@ -42,13 +43,42 @@ export class MetricsHandler {
         const [ , k, timestamp] = data.key.split(":")
         const value = data.value
         if(k != key){
-            console.log(k, key)
-            console.log(`levedb error: ${data.key} key does not match`)
+            failure += `${data.key}, `
         }
         else{
-        results.push(new Metric(timestamp,value))
+         console.log(`levedb success: ${data.key} key does match`)
+         results.push(new Metric(timestamp,value))
+        }
+      console.log(failure)
+    })
+  }
+
+  public del(key: number, callback: (error: Error | null, result?: Metric[]) => void) {
+    /*this.db.del(key, function(error){
+      if(error != null){
+        console.log("there was an error");
+      }
+      else{
+        console.log("delete was successful");
+      }
+    });*/
+
+    const stream = this.db.createReadStream()
+
+    stream.on('error', callback)
+    stream.on('end', (err: Error) => {callback(null)})
+    stream.on('data', (data:any) => {
+        const [ , k, timestamp] = data.key.split(":")
+        if(k == key){
+          this.db.del(data.key, function(error){
+            if(error != null){
+              console.log("there was an error");
+            }
+            else{
+              console.log(`delete was successful on ${data.key}`);
+            }
+          })
         }
     })
   }
-  
 }

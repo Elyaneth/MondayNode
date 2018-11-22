@@ -34,6 +34,16 @@ app.post('/metrics/:id', (req: any, res: any) => {
   })
 })
 
+app.post('/metrics/delete/:id', (req: any, res: any) => {
+  console.log(req.body)
+  dbMetrics.del(req.params.id, (err: Error | null, result?: any) => {
+    if (err) {
+      res.status(500).send(err.message)
+    }
+    res.status(200).send()
+  })
+})
+
 app.listen(port, (err: Error) => {
   if (err) {
     throw err
